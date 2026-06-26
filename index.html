@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forge World Plus — File Showcase</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,900&family=Archivo:wght@400;500;600;700&family=Archivo+Expanded:wght@600;700&display=swap');
+
+  :root{
+    --bg:#1c1714;
+    --bg-2:#241d19;
+    --panel:#2c2420;
+    --panel-2:#352b25;
+    --line:#43362e;
+    --cyan:#37c4d9;
+    --amber:#e8923a;
+    --text:#ece2d6;
+    --muted:#9c8d7e;
+    --muted-2:#6f6358;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--text);
+    font-family:'Archivo',sans-serif;-webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(circle at 88% -5%, rgba(55,196,217,.07), transparent 42%),
+      radial-gradient(circle at 5% 105%, rgba(232,146,58,.06), transparent 45%);
+  }
+  a{color:inherit}
+  ::selection{background:var(--amber);color:var(--bg)}
+
+  /* Masthead */
+  header.mast{
+    padding:clamp(2.4rem,5vw,4.2rem) clamp(1.2rem,4vw,3.5rem) 1.8rem;
+    border-bottom:1px solid var(--line);position:relative;
+  }
+  .eyebrow{
+    font-family:'Archivo',sans-serif;font-weight:600;
+    font-size:.72rem;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--cyan);display:flex;gap:.85rem;align-items:center;flex-wrap:wrap;
+  }
+  .eyebrow .pip{width:7px;height:7px;border-radius:50%;background:var(--amber);box-shadow:0 0 12px var(--amber)}
+  .eyebrow .sep{color:var(--muted-2)}
+  h1{
+    font-family:'Fraunces',serif;font-weight:900;
+    font-size:clamp(2.9rem,9vw,7rem);line-height:.9;letter-spacing:-.02em;
+    margin:.55rem 0 .35rem;
+  }
+  h1 em{font-style:italic;font-weight:500;color:var(--amber)}
+  .lede{max-width:48ch;color:var(--muted);font-size:1.04rem;line-height:1.5;margin:.6rem 0 0}
+  .stats{margin-top:1.8rem;display:flex;gap:2.6rem;flex-wrap:wrap}
+  .stats div{font-family:'Archivo',sans-serif;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2)}
+  .stats b{display:block;font-family:'Fraunces',serif;font-size:1.7rem;font-weight:600;color:var(--text);letter-spacing:-.01em;margin-bottom:.1rem}
+  .stats b.cy{color:var(--cyan)} .stats b.am{color:var(--amber)}
+
+  /* Controls bar */
+  .controls{
+    position:sticky;top:0;z-index:30;
+    background:color-mix(in srgb,var(--bg) 90%,transparent);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+    padding:.7rem clamp(1.2rem,4vw,3.5rem);
+    display:flex;gap:1rem;align-items:center;flex-wrap:wrap;
+  }
+  .search{
+    flex:1;min-width:200px;position:relative;display:flex;align-items:center;
+  }
+  .search svg{position:absolute;left:.7rem;width:16px;height:16px;stroke:var(--muted);pointer-events:none}
+  .search input{
+    width:100%;background:var(--panel);border:1px solid var(--line);
+    color:var(--text);font-family:'Archivo',sans-serif;font-size:.92rem;
+    padding:.6rem .8rem .6rem 2.2rem;border-radius:3px;outline:none;transition:border-color .15s;
+  }
+  .search input::placeholder{color:var(--muted-2)}
+  .search input:focus{border-color:var(--cyan)}
+  .chips{display:flex;gap:.35rem;flex-wrap:wrap}
+  .chip{
+    font-family:'Archivo',sans-serif;font-size:.78rem;font-weight:500;
+    padding:.42rem .8rem;border:1px solid var(--line);background:transparent;
+    color:var(--muted);border-radius:100px;cursor:pointer;transition:all .15s;letter-spacing:.02em;
+  }
+  .chip:hover{color:var(--text);border-color:var(--muted)}
+  .chip.active{background:var(--cyan);border-color:var(--cyan);color:var(--bg);font-weight:600}
+
+  main{padding:0 clamp(1.2rem,4vw,3.5rem) 5rem}
+
+  .band{padding-top:2.8rem;scroll-margin-top:4rem}
+  .band-head{display:flex;align-items:baseline;gap:1rem;border-bottom:1px solid var(--line);padding-bottom:.5rem;margin-bottom:1.5rem}
+  .band-head h2{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(1.9rem,5.5vw,3.2rem);margin:0;letter-spacing:-.02em;line-height:1}
+  .band-head .yr-cnt{margin-left:auto;font-family:'Archivo',sans-serif;font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2)}
+
+  .grid{display:grid;gap:1.7rem;grid-template-columns:repeat(auto-fill,minmax(284px,1fr))}
+  .card{
+    position:relative;display:flex;flex-direction:column;background:var(--panel);
+    border:1px solid var(--line);border-radius:5px;overflow:hidden;text-decoration:none;
+    transition:transform .22s cubic-bezier(.2,.7,.2,1),box-shadow .22s,border-color .22s;
+  }
+  
+  .imgwrap{height:300px;overflow:hidden;background:var(--bg-2);position:relative;cursor:zoom-in;display:flex;align-items:center;justify-content:center}
+  .imgwrap img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+  .card .body{padding:1rem 1.1rem 1.15rem;display:flex;flex-direction:column;gap:.4rem;flex:1}
+  .when{font-family:'Archivo',sans-serif;font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--amber);font-weight:600}
+  .title{font-family:'Fraunces',serif;font-weight:600;font-size:1.24rem;line-height:1.15;letter-spacing:-.01em}
+  .go{margin-top:auto;font-family:'Archivo',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.04em;color:var(--cyan);display:flex;align-items:center;gap:.4rem;opacity:0;transform:translateX(-4px);transition:all .22s}
+  a.card:hover{transform:translateY(-4px);box-shadow:0 16px 34px -16px rgba(0,0,0,.6);border-color:var(--cyan)}
+  a.card:hover .imgwrap img{transform:scale(1.04)}
+  a.card:hover .go{opacity:1;transform:translateX(0)}
+  a.card:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+
+  /* status tag */
+  .tag{position:absolute;top:.6rem;left:.6rem;z-index:3;font-family:'Archivo',sans-serif;font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .55rem;border-radius:100px}
+  .tag.ready{background:rgba(55,196,217,.16);color:var(--cyan);border:1px solid rgba(55,196,217,.4)}
+  .tag.pending{background:rgba(156,141,126,.14);color:var(--muted);border:1px solid var(--muted-2)}
+  .card.missing{cursor:default}
+  .card.missing .imgwrap img{filter:grayscale(.45) brightness(.82)}
+  .card.missing .go{display:none}
+
+  .empty{padding:4rem 1rem;text-align:center;color:var(--muted);font-size:1.05rem;display:none}
+  .empty.show{display:block}
+
+  footer{border-top:1px solid var(--line);margin:0 clamp(1.2rem,4vw,3.5rem);padding:2rem 0 3rem;font-family:'Archivo',sans-serif;font-size:.76rem;color:var(--muted-2);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;letter-spacing:.04em}
+
+  /* Lightbox */
+  .lb{position:fixed;inset:0;z-index:100;background:rgba(12,9,7,.92);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:2rem;cursor:zoom-out}
+  .lb.open{display:flex}
+  .lb-inner{max-width:min(880px,92vw);max-height:90vh;display:flex;flex-direction:column;gap:.9rem;align-items:center}
+  .lb img{max-width:100%;max-height:74vh;object-fit:contain;border-radius:4px;box-shadow:0 24px 60px -20px rgba(0,0,0,.8)}
+  .lb-meta{text-align:center}
+  .lb-meta .lb-when{font-family:'Archivo',sans-serif;font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--amber);font-weight:600;margin-bottom:.25rem}
+  .lb-meta .lb-title{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:600}
+  .lb-meta a{display:inline-block;margin-top:.7rem;font-family:'Archivo',sans-serif;font-size:.82rem;font-weight:600;color:var(--bg);background:var(--cyan);padding:.5rem 1.1rem;border-radius:3px;text-decoration:none;letter-spacing:.03em}
+  .lb-meta a:hover{background:var(--amber)}
+  .lb-meta span.none{color:var(--muted);font-size:.84rem;font-family:'Archivo',sans-serif}
+  .lb-close{position:absolute;top:1.2rem;right:1.4rem;font-size:1.8rem;color:var(--muted);background:none;border:none;cursor:pointer;line-height:1}
+  .lb-close:hover{color:var(--text)}
+
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="mast">
+  <div class="eyebrow"><span class="pip"></span>Forge World Plus<span class="sep">/</span>Monthly File Showcase<span class="sep">/</span>2021&ndash;2026</div>
+  <h1>The <em>Catalogue</em></h1>
+  <p class="lede">Every monthly design drop, from the first banner set to the latest coffee stands. Tap any tile to open its file location.</p>
+  <div class="stats">
+    <div><b id="s-total">0</b>Designs</div>
+    <div><b class="cy" id="s-linked">0</b>Files ready</div>
+    <div><b class="am" id="s-years">0</b>Years</div>
+  </div>
+</header>
+
+<div class="controls">
+  <label class="search">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path></svg>
+    <input id="q" type="search" placeholder="Search designs&hellip;" aria-label="Search designs">
+  </label>
+  <div class="chips" id="chips"></div>
+</div>
+
+<main id="main"></main>
+<div class="empty" id="empty">No designs match that search.</div>
+
+<footer>
+  <span>Forge World Plus &mdash; file showcase</span>
+  <span id="foot"></span>
+</footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true">
+  <button class="lb-close" id="lbClose" aria-label="Close">&times;</button>
+  <div class="lb-inner">
+    <img id="lbImg" alt="">
+    <div class="lb-meta">
+      <div class="lb-when" id="lbWhen"></div>
+      <div class="lb-title" id="lbTitle"></div>
+      <div id="lbLink"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const DATA=[{"month":"August","year":"2021","name":"Saying Signs Set","img":"images/2021-saying-signs-set.jpg","url":null,"missing":true},{"month":"August","year":"2021","name":"Banner Set","img":"images/2021-banner-set.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgDgl84p8YLIQ4ol5EfHvsXpAb3orS-hOePEJhiSvwFVpzE?e=sTiThV","missing":false},{"month":"September","year":"2021","name":"Fall Split","img":"images/2021-fall-split.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgBud-Qo2K0EQI3Y-1kih8uiAYAQSCGZMEyeOUsauVwII-A?e=Oo2Mo6","missing":false},{"month":"October","year":"2021","name":"Rounds Bundle","img":"images/2021-rounds-bundle.jpg","url":null,"missing":true},{"month":"November","year":"2021","name":"Holly Button Frames / Ornaments","img":"images/2021-holly-button-frames-ornaments.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgD0C-aWwkr1S4swI3Qo_4hqAb-i_R0W7b2qvwk8l-H9D9g?e=SuUtOk","missing":false},{"month":"December","year":"2021","name":"Children's Tablet Stands","img":"images/2021-children-s-tablet-stands.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgB5M_dPGEAFR6uZ4DYo9kfRATqiXt3oQkcaZbtf9Ri7pLo?e=Uqt9x8","missing":false},{"month":"January","year":"2022","name":"Jewelry Holder Collection","img":"images/2022-jewelry-holder-collection.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgD_7HrFoELkTLcMLGeZOjo7AeOGxhP49Y0_6EATRiTTc4k?e=YWevmh","missing":false},{"month":"February","year":"2022","name":"Key Holders","img":"images/2022-key-holders.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgCNxp11-KN7S69GT-U4GwdmAdUaYhsxR-HVh3fjmRe46j4?e=b2yZYq","missing":false},{"month":"March","year":"2022","name":"Botanical Engrave Set","img":"images/2022-botanical-engrave-set.jpg","url":null,"missing":true},{"month":"April","year":"2022","name":"Arch Windows","img":"images/2022-arch-windows.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgD8FQzPU3NuSZJfRyWvEAE8AaskeQ8VHb3ySAhbnRStKRs?e=dZ6eRS","missing":false},{"month":"May","year":"2022","name":"Celebration Signs","img":"images/2022-celebration-signs.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgAf_XvM0Q_1S4JFrJIkZfn4Aeq25yyq--E68SVET0xtVl4?e=D9QuiG","missing":false},{"month":"June","year":"2022","name":"Dad Stands","img":"images/2022-dad-stands.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgCwpYYVs0vqRo4UFhMIyFrfAaOAWLWuf4X3DL0bbLYgWmE?e=ffEm5m","missing":false},{"month":"July","year":"2022","name":"Decorative Sign Set","img":"images/2022-decorative-sign-set.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgCr8TGS3H0jSol46ABqWdhAAXq2KFsWwT02nuPQbZ1bdoY?e=XzV5K1","missing":false},{"month":"August","year":"2022","name":"Home Sign","img":"images/2022-home-sign.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgD9k4jrwWyDQ6tynOnpqPMwAU8xxP6Hp49zEc-N34geXnk?e=dr7Cyc","missing":false},{"month":"August","year":"2022","name":"Bonus: Pumpkin","img":"images/2022-bonus-pumpkin.jpg","url":null,"missing":true},{"month":"September","year":"2022","name":"Lantern Set","img":"images/2022-lantern-set.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgCRXI7DHOigQpNhr8qcPmjGAUtyI4EPYWZUDFdiYXkLjow?e=2JFmVF","missing":false},{"month":"October","year":"2022","name":"Scored Ornaments with Icons","img":"images/2022-scored-ornaments-with-icons.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgCw3iiuYgcMRrt6jEayh9huATDBfb4KzImbbipCC8kroM0?e=yaZBo6","missing":false},{"month":"November","year":"2022","name":"Holiday Set","img":"images/2022-holiday-set.jpg","url":null,"missing":true},{"month":"November","year":"2022","name":"Bonus: End of Year Lanterns","img":"images/2022-bonus-end-of-year-lanterns.jpg","url":null,"missing":true},{"month":"December","year":"2022","name":"Playful Ornament Set","img":"images/2022-playful-ornament-set.jpg","url":null,"missing":true},{"month":"January","year":"2023","name":"Frame Set","img":"images/2023-frame-set.jpg","url":null,"missing":true},{"month":"February","year":"2023","name":"Switch Covers","img":"images/2023-switch-covers.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgDpFs9lU_SKQ4NjhN2DuxsZAclHBu-k2hmddHsDoWtKnnU?e=J1Vgvp","missing":false},{"month":"March","year":"2023","name":"Designed Ovals","img":"images/2023-designed-ovals.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgDbSsOlGSLiRqE-uns-l7PnARJSAD5lzv14enhiJ0Z6fuM?e=XbKrEk","missing":false},{"month":"April","year":"2023","name":"Floral Letters","img":"images/2023-floral-letters.jpg","url":null,"missing":true},{"month":"May","year":"2023","name":"Room Sign","img":"images/2023-room-sign.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgBp3-e52Yg2Q51_gS1gVv2sAVuPz4cwQxA4Eb3CkC10GeE?e=yty6PS","missing":false},{"month":"June","year":"2023","name":"Leash Holders","img":"images/2023-leash-holders.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgCI1_lKnxf8QaAV5qLcAx9gARCGPHD4TZjUQnkwsh0Fhek?e=r7ZZgk","missing":false},{"month":"July","year":"2023","name":"Remembrance Set","img":"images/2023-remembrance-set.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgD9fHwj01i6Qr7ydbncZYr6AWXa8T8jzD48YbxSq9FgMHE?e=tgaBA2","missing":false},{"month":"August","year":"2023","name":"Key Holders","img":"images/2023-key-holders.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgD4oEu1KPKFRYcVL4yFwasRAaQu568Tzk95eQ_WYtoSVCE?e=zujP05","missing":false},{"month":"September","year":"2023","name":"Mystical Set","img":"images/2023-mystical-set.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgCsPIz5yausQqr1If55meyNAaE-vXC0hYH7uxTY4_RLHmk?e=MgJIEi","missing":false},{"month":"October","year":"2023","name":"Twirl Monograms & Ornaments","img":"images/2023-twirl-monograms-ornaments.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgAfYNULFsozQJo6cMRHNIFGAULdiD7haIqFMCY016VDqEU?e=tuWDGY","missing":false},{"month":"November","year":"2023","name":"Tray & Ornaments","img":"images/2023-tray-ornaments.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgA3sj3ciNaDS6Fml8rR1DoGAbQx70UQ38iuPISOMljRs2Q?e=hDDQWC","missing":false},{"month":"December","year":"2023","name":"Hexagon Boxes","img":"images/2023-hexagon-boxes.jpg","url":null,"missing":true},{"month":"January","year":"2024","name":"Split Ovals","img":"images/2024-split-ovals.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgDFfLIwSXv5TLhhGViBQkpGARufFHEtuI9xl5q7CC2K52Q?e=x6fib1","missing":false},{"month":"February","year":"2024","name":"Picture Stands","img":"images/2024-picture-stands.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgCAvK5Bqx_pTIS6-PkWwVD7AYKfVC6PYuD0X-Jn8FsQgXg?e=9nW0yh","missing":false},{"month":"March","year":"2024","name":"String Art Set","img":"images/2024-string-art-set.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgB6_x83egbZQq4nHfSG6-dAAVuj8jYFxstS3Y4E5Q1JTNg?e=sIMvoC","missing":false},{"month":"April","year":"2024","name":"April Bundle","img":"images/2024-april-bundle.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgAv2uWyqF6DT4pLmJTE0GBGAeNoh2M2MPQYL14XTTbRVI8?e=7ltMAa","missing":false},{"month":"May","year":"2024","name":"Night Stand Set","img":"images/2024-night-stand-set.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgAo_g4ti_3kQLamqw72231_Ab1ZBCWopOsym5wZmlT9e0Q?e=YXWDzR","missing":false},{"month":"June","year":"2024","name":"Sign Bundle","img":"images/2024-sign-bundle.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgASh_7RNYpgT7JlpquP5z3ZAZWNh79q-QQ1ZNU1u2DKToI?e=rcIlfi","missing":false},{"month":"July","year":"2024","name":"Eclectic Critters","img":"images/2024-eclectic-critters.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgCpyZQV5oycR5vVMsvZ5j_rAWk96-42bFE1zcMt5qNrTDs?e=afKuiW","missing":false},{"month":"August","year":"2024","name":"Snow Globes","img":"images/2024-snow-globes.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgCsN1EfuWL_TLs87sPE1nT7ATsu1qnOpnuu1yivUSaTS6c?e=SUV55T","missing":false},{"month":"September","year":"2024","name":"Pumpkins","img":"images/2024-pumpkins.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgBaQg1KWidwS4g00xkVtTS0AUrBZcTlRXg12IvCgaWHV44?e=NyjSFD","missing":false},{"month":"October","year":"2024","name":"Motif Ornaments","img":"images/2024-motif-ornaments.jpg","url":null,"missing":true},{"month":"November","year":"2024","name":"Line Art Birth Flower Set","img":"images/2024-line-art-birth-flower-set.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgCu03jEYYMQToyc__yrnnzWAUV-SmaMAIKf4KVa_9gFkVY?e=rtcxzo","missing":false},{"month":"December","year":"2024","name":"Snowman Ornaments","img":"images/2024-snowman-ornaments.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgAx9J44Io4-TLsF8pOfYbcwAaFmrM8aXBs6ved1LLluOCg?e=wytFds","missing":false},{"month":"January","year":"2025","name":"Jewelry Display Set","img":"images/2025-jewelry-display-set.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgCsXNw3D8WFRpkqjaPoPeBVAcnskLeoGojRNPhbQ037xyY?e=rWCUs3","missing":false},{"month":"February","year":"2025","name":"Engraved Key Hangers","img":"images/2025-engraved-key-hangers.jpg","url":null,"missing":true},{"month":"March","year":"2025","name":"Sign and Celebration Set","img":"images/2025-sign-and-celebration-set.jpg","url":null,"missing":true},{"month":"April","year":"2025","name":"Life Stands","img":"images/2025-life-stands.jpg","url":null,"missing":true},{"month":"May","year":"2025","name":"Zodiac Collection","img":"images/2025-zodiac-collection.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgDG3OVcPbjJSIAsWm9UKHrnAbVtzPPaS61tdhV_teX-5tQ?e=pSmequ","missing":false},{"month":"June","year":"2025","name":"Layered Heart Signs","img":"images/2025-layered-heart-signs.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgDNvDEHAitrQbHXhfQNndUPAXcMaG0R8kiyfrvq5gZ0wag?e=YDCqhJ","missing":false},{"month":"July","year":"2025","name":"Bird Candle Sconce Set","img":"images/2025-bird-candle-sconce-set.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgDnStRLTn_oSbZRemgFSPE-AQQLjLkUhap6kDXiNNcRtjM?e=HaTtPn","missing":false},{"month":"August","year":"2025","name":"Kitchen Pun Signs","img":"images/2025-kitchen-pun-signs.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgCkuU1yhPEBSrJ9ymCCRF1IAZ3o8lV8oIoUtRNPtFhDNVE?e=KSrE0y","missing":false},{"month":"September","year":"2025","name":"Holiday Advent","img":"images/2025-holiday-advent.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgDN9uNMSN9pTp_dQeJ5Qu5AAaQb2tBr8OWhZ9aboB_XN-Q?e=6FTbAA","missing":false},{"month":"October","year":"2025","name":"Bathroom Signs","img":"images/2025-bathroom-signs.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgAj3R9Ay-IqT7RC4wCS4xLTAUESrPO7RThHpRuyTTLaXFM?e=mhOcEQ","missing":false},{"month":"November","year":"2025","name":"Woodland Candle Holders & Ornaments","img":"images/2025-woodland-candle-holders-ornaments.jpg","url":"https://1drv.ms/u/c/1e1f70a08cb635e0/IQBWmU8RDtCCSq2_9FnGApSmAWrQVgX0scG6lzpg0gB616A?e=viOXcm","missing":false},{"month":"December","year":"2025","name":"Multi-Layer Signs","img":"images/2025-multi-layer-signs.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgBkb51_pTstRpL4ROD0PdMbAWxakRg96okfQhlMpy6-4Ds?e=iyp4PF","missing":false},{"month":"January","year":"2026","name":"Rope Swing Set","img":"images/2026-rope-swing-set.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgCzPQnXxNP2Tb60-ZkWaGOoAdX-smzgvVP6a66e1U48ics?e=JEnmW5","missing":false},{"month":"February","year":"2026","name":"Sun Catcher Set","img":"images/2026-sun-catcher-set.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgCyEdvHPn3TToT4-zSXKv7fAcEjjmg-OusIB4_SESUqTIA?e=7kimET","missing":false},{"month":"March","year":"2026","name":"Scored Frame Set","img":"images/2026-scored-frame-set.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgB2ud4bkFAPTIoCEllQE6NBAYlLTKrQSavo8IMtUbmftXA?e=anTwI1","missing":false},{"month":"April","year":"2026","name":"Kid Light Boxes","img":"images/2026-kid-light-boxes.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgAHAqHbOHZmR4zb5pVl24ZiAQgn876E3FYcN__CifyfimE?e=YOJspn","missing":false},{"month":"May","year":"2026","name":"Perpetual Calendar Set","img":"images/2026-perpetual-calendar-set.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgDoeBkZ2tbmTYfHY6xiBWHlAZHIZ7KvUkV8S9UJiV7YllU?e=LsKcqA","missing":false},{"month":"June","year":"2026","name":"Coffee Stands","img":"images/2026-coffee-stands.jpg","url":"https://1drv.ms/f/c/1e1f70a08cb635e0/IgBdHDpJppaBSYzPi4S91jkTASuc8Yi01Z0QafSCOg1PUA0?e=MEEiJF","missing":false}];
+const MONTHS=["January","February","March","April","May","June","July","August","September","October","November","December"];
+const years=[...new Set(DATA.map(r=>r.year))].sort();
+const linked=DATA.filter(r=>!r.missing).length;
+
+document.getElementById('s-total').textContent=DATA.length; document.getElementById('s-linked').textContent=linked; document.getElementById('s-years').textContent=years.length;
+document.getElementById('foot').textContent=DATA.length+" designs \u00b7 "+linked+" with files \u00b7 "+(DATA.length-linked)+" pending";
+
+// chips
+let filterYear="all";
+const chipsEl=document.getElementById('chips');
+function mkChip(label,val){
+  const b=document.createElement('button');b.className='chip'+(val==='all'?' active':'');b.textContent=label;b.dataset.val=val;
+  b.onclick=()=>{filterYear=val;[...chipsEl.children].forEach(c=>c.classList.toggle('active',c.dataset.val===val));render();};
+  chipsEl.appendChild(b);
+}
+mkChip('All years','all'); years.forEach(y=>mkChip(y,y));
+
+const main=document.getElementById('main');
+const qEl=document.getElementById('q');
+const emptyEl=document.getElementById('empty');
+let query="";
+qEl.addEventListener('input',()=>{query=qEl.value.trim().toLowerCase();render();});
+
+function render(){
+  main.innerHTML="";
+  let shown=0;
+  years.forEach(y=>{
+    if(filterYear!=='all'&&filterYear!==y) return;
+    let items=DATA.filter(r=>r.year===y).sort((a,b)=>MONTHS.indexOf(a.month)-MONTHS.indexOf(b.month));
+    if(query) items=items.filter(r=>(r.name+' '+r.month+' '+r.year).toLowerCase().includes(query));
+    if(!items.length) return;
+    shown+=items.length;
+    const band=document.createElement('section');band.className='band';band.id='y'+y;
+    band.innerHTML='<div class="band-head"><h2>'+y+'</h2><span class="yr-cnt">'+items.length+' drops</span></div>';
+    const grid=document.createElement('div');grid.className='grid';
+    items.forEach((r,i)=>{
+      const ready=!r.missing&&r.url;
+      const tag=ready?'a':'div';
+      const el=document.createElement(tag);
+      el.className='card'+(ready?'':' missing');
+      if(ready){el.href=r.url;el.target='_blank';el.rel='noopener';}
+      el.innerHTML=
+        '<span class="tag '+(ready?'ready':'pending')+'">'+(ready?'Files ready':'Pending')+'</span>'+
+        '<div class="imgwrap" data-idx="'+DATA.indexOf(r)+'"><img loading="lazy" src="'+r.img+'" alt="'+r.name.replace(/"/g,'&quot;')+'"></div>'+
+        '<div class="body"><div class="when">'+r.month+' '+r.year+'</div><div class="title">'+r.name+'</div>'+
+        (ready?'<div class="go">Open files &rarr;</div>':'')+'</div>';
+      grid.appendChild(el);
+    });
+    band.appendChild(grid);main.appendChild(band);
+  });
+  emptyEl.classList.toggle('show',shown===0);
+}
+render();
+
+// lightbox (click image; don't trigger card link)
+const lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg'),lbWhen=document.getElementById('lbWhen'),lbTitle=document.getElementById('lbTitle'),lbLink=document.getElementById('lbLink');
+main.addEventListener('click',e=>{
+  const w=e.target.closest('.imgwrap'); if(!w) return;
+  e.preventDefault(); e.stopPropagation();
+  const r=DATA[+w.dataset.idx];
+  lbImg.src=r.img; lbImg.alt=r.name; lbWhen.textContent=r.month+' '+r.year; lbTitle.textContent=r.name;
+  lbLink.innerHTML=(!r.missing&&r.url)?'<a href="'+r.url+'" target="_blank" rel="noopener">Open files &rarr;</a>':'<span class="none">No file link yet</span>';
+  lb.classList.add('open');
+});
+function closeLb(){lb.classList.remove('open');lbImg.src="";}
+lb.addEventListener('click',e=>{if(e.target===lb||e.target.id==='lbClose'||e.target.closest('.lb-close'))closeLb();});
+document.getElementById('lbClose').onclick=closeLb;
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb();});
+</script>
+</body>
+</html>
